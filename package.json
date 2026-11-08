@@ -1,0 +1,20 @@
+{
+  "name": "suneung-cheer-space",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "수능 응원 3D 공간 — 학교마다 이름만 바꿔 쓰는 템플릿",
+  "scripts": {
+    "dev": "vite --port 5191 --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --port 5192 --host 127.0.0.1",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "firebase": "11.9.1",
+    "three": "0.176.0"
+  },
+  "devDependencies": {
+    "vite": "6.3.5"
+  }
+}

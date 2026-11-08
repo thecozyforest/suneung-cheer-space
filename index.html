@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <!-- 제목·설명은 src/data/school.js 의 SCHOOL 값으로 실행할 때 다시 채워진다.
+       공유 미리보기(og:)는 정적이라 바뀌지 않으니, 여기 두 줄은 직접 고친다. -->
+  <title>수능 응원 공간</title>
+  <meta name="description" content="수능을 응원하는 3D 공간. 로그인 없이 별명으로 들어와 기원하고, 부수고, 쉬어 가요." />
+  <meta name="theme-color" content="#f7efe0" />
+  <meta property="og:title" content="수능 응원 공간" />
+  <meta property="og:description" content="잠깐 들어왔다 나가도 괜찮은 곳." />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2322305a'/%3E%3Cpath d='M32 14l4.6 10.6 11.4 1-8.7 7.6 2.6 11.2L32 38.6 22.1 44.4l2.6-11.2L16 25.6l11.4-1z' fill='%23e9b44c'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <canvas id="scene" aria-label="3D 학교 공간"></canvas>
+  <div id="labels" aria-hidden="true"></div>
+  <div id="fade"></div>
+  <div id="ui"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

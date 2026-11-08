@@ -1,0 +1,47 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "rooms": {
+      "$room": {
+        ".read": "auth != null && $room.matches(/^[a-z]{2,12}$/)",
+        "u": {
+          "$uid": {
+            ".write": "auth != null && auth.uid === $uid && $room.matches(/^[a-z]{2,12}$/)",
+            ".validate": "newData.hasChildren(['n', 'x', 'z', 't'])",
+            "n": { ".validate": "newData.isString() && newData.val().length <= 8" },
+            "l": { ".validate": "newData.isString() && newData.val().length <= 24" },
+            "x": { ".validate": "newData.isNumber() && newData.val() > -200 && newData.val() < 200" },
+            "z": { ".validate": "newData.isNumber() && newData.val() > -200 && newData.val() < 200" },
+            "tx": { ".validate": "newData.isNumber() && newData.val() > -200 && newData.val() < 200" },
+            "tz": { ".validate": "newData.isNumber() && newData.val() > -200 && newData.val() < 200" },
+            "r": { ".validate": "newData.isNumber() && newData.val() > -20 && newData.val() < 20" },
+            "a": { ".validate": "newData.isString() && newData.val().length <= 12" },
+            "k": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() < 1000000" },
+            "h": { ".validate": "newData.isString() && newData.val().length <= 12" },
+            "s": { ".validate": "newData.isString() && newData.val().length <= 16" },
+            "t": { ".validate": "newData.isNumber() && newData.val() <= now + 60000" },
+            "$other": { ".validate": false }
+          }
+        }
+      }
+    },
+    "seats": {
+      "$room": {
+        ".read": "auth != null",
+        "$seat": {
+          ".write": "auth != null && $seat.matches(/^[A-Za-z0-9_-]{1,16}$/) && ((!data.exists() && newData.val() === auth.uid) || (data.val() === auth.uid && !newData.exists()))"
+        }
+      }
+    },
+    "counts": {
+      "$day": {
+        ".read": "auth != null",
+        "$key": {
+          ".write": "auth != null && $day.matches(/^20[0-9]{6}$/) && $key.matches(/^[a-z]{2,16}$/)",
+          ".validate": "newData.isNumber() && newData.val() === (data.exists() ? data.val() : 0) + 1"
+        }
+      }
+    }
+  }
+}
