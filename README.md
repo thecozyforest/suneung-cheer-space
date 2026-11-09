@@ -51,64 +51,50 @@ npm run build       # dist/ 로 정적 빌드
 
 ## 우리 학교 버전으로 바꾸기
 
-### 1단계 — 학교 정보 (필수)
+**[→ 단계별 안내서: docs/내-학교로-바꾸기.md](docs/내-학교로-바꾸기.md)**
 
-`src/data/school.js` 한 파일만 고칩니다. 간판·전광판·응원 문구·탭 제목이 한꺼번에 바뀝니다.
+단계마다 고칠 파일과 **AI에 그대로 붙여 넣을 요청문**이 적혀 있습니다.
 
-```js
-export const SCHOOL = {
-  name: '○○고등학교',          // 교문·본관 간판
-  short: '○○',                 // 전광판·응원 문구 (2~3글자)
-  appName: '○○ 수능 응원 공간', // 탭 제목
-  audience: '○○고 학생·졸업생·선생님·학부모 누구나',
-  neis: { office: '', school: '' },  // 급식 (아래 참고)
-  examDate: '2026-11-19',            // D-day 기준 날짜
-  campus: { annex: '별관' },         // 본관 뒤 건물 이름
-};
-```
+| 단계 | 하는 일 | 고치는 파일 | 시간 |
+|---|---|---|---|
+| 1 | 내 저장소로 복사해 띄우기 | — | 10분 |
+| 2 | **학교 이름·수능일·급식** | `src/data/school.js` | 10분 |
+| 3 | 공간 이름과 소개 글 | `src/scenes/registry.js` | 20분 |
+| 4 | 응원 문구 | `src/data/phrases.js` | 30분 |
+| 5 | 교복 색 | `src/engine/avatar.js` | 20분 |
+| 6 | 학교 모양 | [학교-모양-고치기.md](docs/학교-모양-고치기.md) | 2~6시간 |
+| 7 | 함께 접속·공개 | [함께-접속과-배포.md](docs/함께-접속과-배포.md) | 40분 |
 
-**급식 코드 찾기** — [나이스 교육정보 개방 포털](https://open.neis.go.kr)에서 '학교기본정보(schoolInfo)'로
-학교를 검색하면 나옵니다. `office`는 시도교육청 코드(서울 `B10`, 경기 `J10` …), `school`은 7자리 학교 코드입니다.
-비워 두면 급식 창만 "설정되지 않았어요"로 뜨고 나머지는 그대로 동작합니다.
+**2단계까지만 해도 우리 학교 이름으로 돌아갑니다.** 나머지는 할수록 우리 학교처럼 보입니다.
 
-공유 미리보기(`og:`)에 쓰이는 제목은 정적이라 `index.html`의 두 줄도 함께 고쳐야 합니다.
+위쪽 초록색 **[Use this template]** 으로 내 저장소에 복사하는 것부터 시작하세요.
 
-### 2단계 — 함께 접속 (선택)
+## 올리기
 
-혼자 보기로도 충분하면 넘어가도 됩니다. 친구들이 서로 보이게 하려면 `src/firebase-config.js`에
-**자기 Firebase 프로젝트** 값을 채웁니다. 파일 맨 위에 순서가 적혀 있습니다.
-
-1. [Firebase 콘솔](https://console.firebase.google.com)에서 프로젝트 만들기
-2. **Realtime Database** 만들기(지역 `asia-southeast1` 권장)
-3. **Authentication → 로그인 방법 → 익명** 사용 설정
-4. 프로젝트 설정 → 웹 앱(`</>`) 추가 → `firebaseConfig` 값을 붙여넣기
-5. 보안 규칙 올리기 — `firebase deploy --only database --project <내-프로젝트-id>`
-
-보안 규칙(`database.rules.json`)은 그대로 쓰는 것을 권합니다. 본인 칸만 쓰기, 빈자리만 앉기,
-응원 수는 한 번에 +1만 — 이 세 가지로 남의 자리를 지우거나 숫자를 조작하는 걸 막습니다.
-
-### 3단계 — 학교 모양 (선택)
-
-건물 배치는 코드로 그린 개략 표현입니다. 좌표를 고쳐 자기 학교 모양으로 만듭니다.
-
-- `src/scenes/front.js` — 정문·앞마당·본관·운동장·관람석
-- `src/scenes/rear.js` — 본관 뒤 강당·농구장·별관·숲길
-- `src/scenes/hall.js` — 복도 색과 문
-- `src/engine/avatar.js` — 교복 색
-
-## 올리기 (Firebase Hosting)
+Firebase Hosting으로 공개합니다. 자세한 순서는 [함께-접속과-배포.md](docs/함께-접속과-배포.md)에 있습니다.
 
 ```bash
 npm run build
 firebase deploy --only hosting --project <내-프로젝트-id>
 ```
 
-`.firebaserc`는 `.gitignore`에 들어 있어 저장소에 남지 않습니다. 프로젝트는 `--project`로 지정하거나
-`firebase use --add`로 한 번 등록해 두면 됩니다.
+**무료 한도(Spark)** — 실시간 DB 동시 접속 100명, 전송 하루 360MB.
+넘으면 101번째부터 자동으로 혼자 보기로 들어갑니다(오류가 나지는 않습니다).
+한 학년 정도면 무료로 충분하고, 전교생에게 한꺼번에 공지할 때는 Blaze(종량제)를 검토하세요.
 
-**무료 한도(Spark)** — 실시간 DB 동시 접속 100명, 내려받기·호스팅 전송 각각 하루 360MB.
-넘으면 101번째부터 자동으로 혼자 보기로 들어갑니다. 학교 전체에 공지할 때는
-Blaze(종량제, 넘는 만큼만 과금)로 올리는 것을 검토하세요.
+## 함께 만들기
+
+이 저장소는 **가져가서 쓰는 템플릿**입니다. 가장 반가운 기여는 "우리 학교에서 이렇게 썼습니다"라는 이야기입니다.
+
+| | |
+|---|---|
+| 🏫 적용 후기 · 💡 제안 · 🐛 버그 · 📖 안내서가 막혔을 때 | [이슈 열기](../../issues/new/choose) |
+| 코드·안내서를 직접 고쳐 보내기 | [CONTRIBUTING.md](CONTRIBUTING.md) |
+| 함께 있는 자리의 약속 | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) |
+| 보안·개인정보 제보 (비공개) | [SECURITY.md](SECURITY.md) |
+| AI 코딩 도구를 쓸 때의 규칙 | [AGENTS.md](AGENTS.md) |
+
+**안내서를 따라가다 막힌 곳을 알려 주시는 것이 가장 큰 도움이 됩니다.** 해결책을 못 찾으셨어도 괜찮습니다.
 
 ## 폴더 구조
 
@@ -138,5 +124,6 @@ tests/                 논리 시험 (npm test)
 
 ## 라이선스와 출처
 
-코드와 글은 MIT 라이선스입니다([LICENSE](LICENSE)). 참고한 작품, 쓰인 자료와
-라이브러리 출처는 [ASSET_CREDITS.md](ASSET_CREDITS.md)에 있습니다.
+- **코드** — [MIT](LICENSE). 상업적 이용 포함 자유롭게 쓰실 수 있습니다.
+- **문서·화면 사진** — [CC BY 4.0](LICENSE-CONTENT.md). 출처 한 줄만 남겨 주세요.
+- 참고한 작품, 쓰인 자료와 라이브러리 출처는 [ASSET_CREDITS.md](ASSET_CREDITS.md)에 있습니다.

@@ -1,0 +1,70 @@
+name: 🐛 잘못 동작해요
+description: 화면이 깨지거나, 눌러도 안 되거나, 오류가 납니다
+labels: ["버그"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **화면 사진을 붙이실 때는 다른 사람의 별명이 찍혀 있지 않은지 봐 주세요.**
+        학생 이름·학교명·연락처는 적지 말아 주세요.
+
+  - type: textarea
+    id: what
+    attributes:
+      label: 무슨 일이 있었나요
+      placeholder: 자습실에서 '오늘 급식'을 눌렀더니 아무것도 안 떴습니다.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 어떻게 하면 그렇게 되나요
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: input
+    id: where
+    attributes:
+      label: 어느 공간인가요
+      placeholder: 자습실 (주소 끝에 ?space=study)
+
+  - type: dropdown
+    id: device
+    attributes:
+      label: 무엇으로 보셨나요
+      options:
+        - 휴대폰
+        - 태블릿
+        - 노트북·데스크톱
+        - 교실 TV·전자칠판
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: 브라우저
+      placeholder: 크롬 / 사파리 / 삼성인터넷 / 엣지
+
+  - type: dropdown
+    id: version
+    attributes:
+      label: 어느 쪽에서 났나요
+      options:
+        - 이 저장소를 그대로 받아서 (npm run dev)
+        - 우리 학교 버전으로 고친 뒤에
+        - 잘 모르겠습니다
+    validations:
+      required: true
+
+  - type: textarea
+    id: console
+    attributes:
+      label: 오류 메시지가 있다면
+      description: 브라우저에서 F12 → Console 에 빨간 글씨가 있으면 붙여 주세요. 없으면 비워 두셔도 됩니다.
+      render: text

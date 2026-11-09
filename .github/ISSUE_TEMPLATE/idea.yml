@@ -1,0 +1,46 @@
+name: 💡 이런 게 있으면 좋겠어요
+description: 새 공간, 새 할 거리, 고쳤으면 하는 점
+labels: ["제안"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        큰 변화(새 공간, 설계가 바뀌는 일)는 **만들기 전에 여기서 먼저 이야기해 주세요.**
+        다 만들고 나서 방향이 안 맞으면 서로 아깝습니다.
+
+  - type: textarea
+    id: idea
+    attributes:
+      label: 어떤 것인가요
+      placeholder: 도서관 공간이 있으면 좋겠습니다. 조용히 앉아서 책을 고르는 정도로요.
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: 학생에게 어떤 도움이 될까요
+      description: 이 프로젝트는 "잠깐 들어왔다 나가도 괜찮은 곳"을 만드는 게 목적입니다.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: who
+    attributes:
+      label: 만드는 건 어떻게 할까요
+      options:
+        - 제가 만들어서 PR을 보내겠습니다
+        - 제안만 하겠습니다
+        - 같이 의논하고 싶습니다
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: rules
+    attributes:
+      label: 확인
+      options:
+        - label: 글을 자유롭게 입력하는 칸을 만드는 제안이 **아닙니다** (응원·소원은 고르기만 합니다)
+          required: true
+        - label: 실제 인물(학생·교직원)을 등장시키는 제안이 **아닙니다**
+          required: true

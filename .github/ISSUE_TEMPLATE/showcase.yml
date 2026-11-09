@@ -1,0 +1,51 @@
+name: 🏫 우리 학교에 적용했어요
+description: 만드신 버전을 알려 주세요. 다음 분들께 가장 큰 도움이 됩니다.
+labels: ["적용 후기"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **이 저장소가 있는 이유입니다.** 어떻게 쓰셨는지 알려 주세요.
+
+        다만 **학교 이름을 밝히는 것도 선택**입니다. 밝히기 어려우시면
+        "경기도 ○○고"처럼 적으셔도 되고, 주소를 빼고 후기만 남기셔도 됩니다.
+
+  - type: input
+    id: school
+    attributes:
+      label: 학교 (밝히기 어려우시면 비워 두세요)
+      placeholder: 경기도 한빛고등학교
+
+  - type: input
+    id: url
+    attributes:
+      label: 주소 (공개하셨다면)
+      placeholder: https://hanbit-cheer.web.app
+
+  - type: textarea
+    id: changed
+    attributes:
+      label: 어디까지 바꾸셨나요
+      placeholder: |
+        학교 이름·급식·응원 문구를 바꾸고, 본관을 一자로 고쳤습니다.
+        옥상은 우리 학교에 없어서 뺐고, 대신 도서관을 넣었습니다.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reaction
+    attributes:
+      label: 학생들 반응은 어땠나요
+      placeholder: 3학년 교실 TV에 띄워 뒀더니 쉬는 시간마다 들어와 봤습니다.
+
+  - type: textarea
+    id: hard
+    attributes:
+      label: 제일 어려웠던 곳
+      description: 안내서를 고치는 데 쓰겠습니다.
+
+  - type: textarea
+    id: shot
+    attributes:
+      label: 화면 사진 (선택)
+      description: 다른 사람의 별명이나 학생 얼굴이 찍혀 있지 않은지 봐 주세요.

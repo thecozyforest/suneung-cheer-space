@@ -4,3 +4,18 @@ dist/
 .firebaserc
 *.log
 .DS_Store
+
+# 학교 참고 자료 — 저장소에 올리지 않는다 (설계 도면·배치도·항공사진·명렬표)
+_참고자료/
+_공개준비/
+*.dwg
+*.hwp
+*.hwpx
+*.xlsx
+
+# 비밀값
+.env
+.env.*
+!.env.example
+*firebase-adminsdk*.json
+serviceAccount*.json

@@ -1,0 +1,51 @@
+name: 📖 안내서를 따라가다 막혔어요
+description: 우리 학교 버전을 만들다가 헷갈리거나 막힌 곳이 있습니다
+labels: ["안내서"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **이게 가장 귀한 제보입니다.** 막힌 곳이 곧 안내서가 부족한 곳입니다.
+        해결책을 못 찾으셨어도 "여기서 막혔다"만 적어 주시면 됩니다.
+
+  - type: dropdown
+    id: step
+    attributes:
+      label: 어느 단계인가요
+      options:
+        - 0단계 — 준비 (Node.js 깔기 등)
+        - 1단계 — 복사해서 띄우기
+        - 2단계 — 학교 이름·수능일·급식
+        - 3단계 — 공간 이름과 소개 글
+        - 4단계 — 응원 문구
+        - 5단계 — 교복 색
+        - 6단계 — 학교 모양
+        - 7단계 — 함께 접속·배포
+        - 안내서에 없는 일
+    validations:
+      required: true
+
+  - type: textarea
+    id: stuck
+    attributes:
+      label: 어디서 막혔나요
+      placeholder: |
+        안내서에는 '나이스 코드를 찾으세요'라고만 돼 있는데,
+        포털에서 어느 메뉴로 들어가야 하는지 몰라 한참 헤맸습니다.
+    validations:
+      required: true
+
+  - type: textarea
+    id: tried
+    attributes:
+      label: 해 보신 것 (있다면)
+
+  - type: dropdown
+    id: ai
+    attributes:
+      label: AI 코딩 도구를 쓰셨나요
+      options:
+        - Claude Code
+        - Codex
+        - 다른 도구
+        - 손으로 했습니다

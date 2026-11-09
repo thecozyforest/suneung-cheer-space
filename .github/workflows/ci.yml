@@ -1,0 +1,64 @@
+name: 점검
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# 외부에서 온 PR이 저장소를 고치지 못하게 읽기 권한만 준다
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: 의존성 설치
+        run: npm ci
+
+      - name: 시험
+        run: npm test
+
+      - name: 빌드
+        run: npm run build
+
+      - name: 비밀값·개인정보가 섞였는지 검사
+        run: |
+          fail=0
+          EX="--exclude-dir=node_modules --exclude-dir=.git --exclude-dir=dist"
+
+          if grep -rIn $EX -E 'AIza[0-9A-Za-z_-]{33}' .; then
+            echo "::error::Firebase API 키로 보이는 문자열이 있습니다. 지우고 다시 올려 주세요."
+            fail=1
+          fi
+
+          if grep -rIn $EX -E '"private_key"[[:space:]]*:' .; then
+            echo "::error::서비스 계정 키로 보이는 내용이 있습니다. 절대 올리면 안 되는 값입니다."
+            fail=1
+          fi
+
+          if ! grep -q 'export const firebaseConfig = null;' src/firebase-config.js; then
+            echo "::error::src/firebase-config.js 는 이 저장소에서 null 이어야 합니다. 내 학교 설정은 각자 저장소에서만 채웁니다."
+            fail=1
+          fi
+
+          if [ -f .firebaserc ]; then
+            echo "::error::.firebaserc 는 저장소에 넣지 않습니다."
+            fail=1
+          fi
+
+          if [ -d _참고자료 ]; then
+            echo "::error::_참고자료/ 는 저장소에 올리지 않습니다 (도면·항공사진 등)."
+            fail=1
+          fi
+
+          if [ $fail -eq 0 ]; then echo "깨끗합니다."; fi
+          exit $fail

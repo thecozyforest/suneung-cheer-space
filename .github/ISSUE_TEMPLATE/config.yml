@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 먼저 안내서를 보세요
+    url: https://github.com/thecozyforest/suneung-cheer-space/blob/main/docs/%EB%82%B4-%ED%95%99%EA%B5%90%EB%A1%9C-%EB%B0%94%EA%BE%B8%EA%B8%B0.md
+    about: 우리 학교 버전으로 바꾸는 단계별 안내서입니다. 단계마다 AI에 붙여 넣을 요청문이 있습니다.
+  - name: 보안·개인정보 제보는 비공개로
+    url: https://github.com/thecozyforest/suneung-cheer-space/security/advisories/new
+    about: 개인정보가 노출됐거나 보안 문제를 찾으셨다면 공개 이슈 대신 여기로 조용히 알려 주세요.
