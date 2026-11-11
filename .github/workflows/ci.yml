@@ -35,18 +35,22 @@ jobs:
           fail=0
           EX="--exclude-dir=node_modules --exclude-dir=.git --exclude-dir=dist"
 
-          if grep -rIn $EX -E 'AIza[0-9A-Za-z_-]{33}' .; then
-            echo "::error::Firebase API 키로 보이는 문자열이 있습니다. 지우고 다시 올려 주세요."
-            fail=1
+          # 공개 템플릿 원본에서만 보는 검사. 복사해 간 학교 저장소는 자기 Firebase 웹 설정을 채우는 것이 정상이다.
+          # 포크에서 원본으로 보낸 PR도 GITHUB_REPOSITORY가 원본이므로 여기서 걸러진다.
+          if [ "$GITHUB_REPOSITORY" = "thecozyforest/suneung-cheer-space" ]; then
+            if grep -rIn $EX -E 'AIza[0-9A-Za-z_-]{33}' .; then
+              echo "::error::Firebase API 키로 보이는 문자열이 있습니다. 지우고 다시 올려 주세요."
+              fail=1
+            fi
+
+            if ! grep -q 'export const firebaseConfig = null;' src/firebase-config.js; then
+              echo "::error::src/firebase-config.js 는 이 저장소에서 null 이어야 합니다. 내 학교 설정은 각자 저장소에서만 채웁니다."
+              fail=1
+            fi
           fi
 
           if grep -rIn $EX -E '"private_key"[[:space:]]*:' .; then
             echo "::error::서비스 계정 키로 보이는 내용이 있습니다. 절대 올리면 안 되는 값입니다."
-            fail=1
-          fi
-
-          if ! grep -q 'export const firebaseConfig = null;' src/firebase-config.js; then
-            echo "::error::src/firebase-config.js 는 이 저장소에서 null 이어야 합니다. 내 학교 설정은 각자 저장소에서만 채웁니다."
             fail=1
           fi
 
